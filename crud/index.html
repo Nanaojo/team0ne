@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Service Dashboard with Animations</title>
+    <style>
+      /* Basic Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #181818;
+        color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        padding: 20px;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #252525;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .sidebar h2 {
+        color: #f4f4f4;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin: 15px 0;
+        color: #ddd;
+        font-size: 16px;
+      }
+
+      .main-content {
+        flex-grow: 1;
+        margin-left: 20px;
+        background-color: #2d2d2d;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .main-header h1 {
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .search-bar {
+        background-color: #444;
+        padding: 10px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        width: 300px;
+      }
+
+      .search-bar input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #f4f4f4;
+        width: 100%;
+        padding-left: 10px;
+      }
+
+      .search-bar i {
+        color: #aaa;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #2b2b2b;
+        border-radius: 8px;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #333;
+      }
+
+      th {
+        background-color: #333;
+        color: #aaa;
+      }
+
+      td {
+        color: #ddd;
+      }
+
+      .btn {
+        padding: 10px 15px;
+        background-color: #ff7f50;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background-color: #ff6347;
+      }
+
+      .action-icons img {
+        width: 20px;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+
+      .customer-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+      }
+
+      .customer-info div {
+        width: 48%;
+      }
+
+      .customer-info input,
+      .customer-info select {
+        width: 100%;
+        padding: 10px;
+        background-color: #444;
+        border: 1px solid #555;
+        border-radius: 5px;
+        color: #f4f4f4;
+        margin-top: 10px;
+      }
+
+      .activity-log {
+        background-color: #252525;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .activity-log h2 {
+        margin-bottom: 10px;
+      }
+
+      .activity-log ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .activity-log ul li {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #bbb;
+      }
+
+      /* Animation Styles */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animate new customer row */
+      .new-customer {
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      /* Animate removing a row */
+      .remove-customer {
+        animation: fadeOut 0.5s ease-out;
+      }
+
+      /* Button hover animation */
+      .btn {
+        transition: background-color 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>Customers Service</h2>
+        <ul>
+          <li>Activity Log</li>
+          <li>Add Customer</li>
+          <li>View Customers</li>
+          <li>Reports</li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="main-header">
+          <h1>List of Customers</h1>
+          <div class="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="activity-log">
+          <h2>Activity Log</h2>
+          <ul>
+            <li>10:30 AM - Customer 1 added</li>
+            <li>10:25 AM - Customer 2 added</li>
+            <li>9:00 AM - Ticket 1 created</li>
+          </ul>
+        </div>
+
+        <!-- Add Customer Form -->
+        <div class="customer-info">
+          <div>
+            <input id="first-name" type="text" placeholder="First Name" />
+            <input id="last-name" type="text" placeholder="Last Name" />
+          </div>
+          <div>
+            <input id="dob" type="date" />
+            <input id="phone-number" type="tel" placeholder="Phone Number" />
+          </div>
+        </div>
+        <button class="btn" onclick="addCustomer()">Add Customer</button>
+
+        <!-- Table of Customers -->
+        <table>
+          <thead>
+            <tr>
+              <th>Date Added</th>
+              <th>Name</th>
+              <th>Date of Birth</th>
+              <th>Phone Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="customer-list">
+            <tr class="new-customer">
+              <td>18-06-2017</td>
+              <td>John Doe</td>
+              <td>18-06-1987</td>
+              <td>+55555555</td>
+              <td class="action-icons">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                  alt="Delete"
+                  onclick="deleteCustomer(this)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Function to add a customer with animation
+      function addCustomer() {
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const dob = document.getElementById("dob").value;
+        const phoneNumber = document.getElementById("phone-number").value;
+
+        if (firstName && lastName && dob && phoneNumber) {
+          const customerList = document.getElementById("customer-list");
+          const newRow = document.createElement("tr");
+          newRow.classList.add("new-customer"); // Add animation class
+          newRow.innerHTML = `
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>${firstName} ${lastName}</td>
+                    <td>${dob}</td>
+                    <td>${phoneNumber}</td>
+                    <td class="action-icons">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="Delete" onclick="deleteCustomer(this)">
+                    </td>
+                `;
+          customerList.appendChild(newRow);
+          clearInputs(); // Clear input fields after adding
+        } else {
+          alert("Please fill in all fields.");
+        }
+      }
+
+      // Function to delete a customer with animation
+      function deleteCustomer(button) {
+        const row = button.parentElement.parentElement;
+        row.classList.add("remove-customer"); // Add animation class
+        setTimeout(() => row.remove(), 500); // Delay the removal for animation
+      }
+
+      // Function to clear input fields after adding a customer
+      function clearInputs() {
+        document.getElementById("first-name").value = "";
+        document.getElementById("last-name").value = "";
+        document.getElementById("dob").value = "";
+        document.getElementById("phone-number").value = "";
+      }
+    </script>
+  </body>
+</html>
